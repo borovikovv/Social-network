@@ -1,0 +1,16 @@
+.setting {
+    display: flex;
+    margin-top: 10px;
+    justify-content: center;
+    align-items: flex-start;
+    font-family: sans-serif;
+    color: grey;
+    background: no-repeat url('./../../img/setting.png') center/25%
+}
+
+@media(min-width: 768px){
+    .setting{
+        background: no-repeat url('./../../img/setting.png') center/12%
+
+    }
+}

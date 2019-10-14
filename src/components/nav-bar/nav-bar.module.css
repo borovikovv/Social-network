@@ -1,0 +1,16 @@
+.nav{
+    background-color: #EBEBEC;
+    grid-area: n;
+}
+    .item{
+        height: 30px;
+        margin-bottom: 5px;
+    }
+        a{  
+            font-family: 'Kanit', sans-serif;
+            font-size: 24px;
+            text-decoration: none;
+            margin-left: 5px;
+            color: rgba(51, 51, 51, 0.845);
+
+        }

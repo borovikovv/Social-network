@@ -1,0 +1,17 @@
+.appWrapper {
+    display: grid;
+    grid-template-areas:
+    "h h h"
+    "n p p";
+    grid-template-rows:  30px 100%;
+    grid-template-columns: 150px 2fr;
+    grid-gap: 10px; 
+
+}
+.appWrapperContent {
+    display: grid;
+    background-color: #ffffff82;
+    grid-area: p;
+    padding-top: 10px;
+    
+}
