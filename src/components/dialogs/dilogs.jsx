@@ -1,7 +1,6 @@
 import React from 'react';
 import style from  './dialogs.module.css';
 
-
 const Dialogs = ({dialogsPage}) => {
 
     const { messages, dialogs } = dialogsPage;

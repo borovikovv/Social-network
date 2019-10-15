@@ -1,4 +1,5 @@
 import image from './../img/no-image.jpeg';
+import { rerenderEntireTree } from '../render';
 
 let state = {
     dialogsPage:  {
@@ -25,6 +26,17 @@ let state = {
             {id: 3, text: 'Smell my hand, bro...'},
         ]
     }
+};
+
+let newId = 6;
+
+export const addPost = (messageText) => {
+    let newPost = {
+        id: newId++,
+        text: messageText
+    };
+    state.profilePage.posts.push(newPost);
+    rerenderEntireTree(state);
 };
 
 export default state;
