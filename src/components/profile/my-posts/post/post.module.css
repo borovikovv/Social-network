@@ -1,5 +1,6 @@
 .post{
     display: flex;
+    margin-top: 10px;
 }
 .img{
     margin-left: 10px;

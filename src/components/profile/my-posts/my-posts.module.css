@@ -5,20 +5,18 @@
 .myPosts > .createPost {
     margin-top: 2px;
 }
-.createPost > textarea{
-        margin: 10px;
-        font-size: 20px;
+    button {
+        margin: 0px 0px 20px 160px;
     }
-    .createPost > button {
-        display: grid;
-        margin: -5px 0px 10px 10px;
-        width: 70px;
-        height: 20px;
-        background-color: steelblue;
-        border-radius: 5px;
-        color: aliceblue;
+    .createPost > textarea{
+        margin: 0px 10px 0px 10px;
+        font-size: 20px;
     }
     .textArea {
         border: 1px solid white;
         border-radius: .4em;
     }
+.header {
+    margin-left: 20px;
+    margin-top: 40px;
+}

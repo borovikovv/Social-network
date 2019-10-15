@@ -1,69 +1,36 @@
 import React from 'react';
 import style from  './dialogs.module.css';
-import image from './../../img/no-image.jpeg';
 
-const Dialogs = () => {
+
+const Dialogs = ({dialogsPage}) => {
+
+    const { messages, dialogs } = dialogsPage;
+
+    const dialogPerson = dialogs.map((person) => {
+        return  <div key={person.id} className={style.dialog}>
+                    <div className={style.imageContainer}>
+                        <img className={style.img} src={person.image} alt='img'/>
+                    </div>
+                    <span className={style.name}>
+                        {person.name} 
+                    </span>
+                </div>
+    });  
+    const dialogMessage = messages.map((message) => {
+        return  <div key={message.id} className={style.message}>
+                    <span className={`${style.text} ${style.speechBubble}`}>
+                        { message.text }
+                    </span>
+                </div>
+    });
     return (
         <div className={style.component}>
             <div className={style.dialogs}>
-                <div className={style.dialog}>
-                    <div className={style.imageContainer}>
-                        <img className={style.img} src={image} alt='img'/>
-                    </div>
-                    <span className={style.name}> Tom Tailor </span>
-                </div>
-                <div className={style.dialog}>
-                    <div className={style.imageContainer}>
-                        <img className={style.img} src={image} alt='img'/>
-                    </div>
-                    <span className={style.name}> Tom Tailor </span>
-                </div>
-                <div className={style.dialog}>
-                    <div className={style.imageContainer}>
-                        <img className={style.img} src={image} alt='img'/>
-                    </div>
-                    <span className={style.name}> Tom Tailor </span>
-                </div>
-                <div className={style.dialog}>
-                    <div className={style.imageContainer}>
-                        <img className={style.img} src={image} alt='img'/>
-                    </div>
-                    <span className={style.name}> Tom Tailor </span>
-                </div>
-                <div className={style.dialog}>
-                    <div className={style.imageContainer}>
-                        <img className={style.img} src={image} alt='img'/>
-                    </div>
-                    <span className={style.name}> Tom Tailor </span>
-                </div>
+                { dialogPerson }
             </div>
+
             <div className={style.messages}>
-                <div className={style.message}>
-                    <span className={`${style.text} ${style.speechBubble}`}>
-                        lorem Ipsum ho ho ho
-                    </span>
-                </div>
-                <div className={style.message}>
-                    <span className={`${style.text} ${style.speechBubble}`}>
-                        lorem Ipsum ho ho ho, 
-                        jglj
-                    </span>
-                </div>
-                <div className={style.message}>
-                    <span className={`${style.text} ${style.speechBubble}`}>
-                        lorem Ipsum ho ho ho
-                    </span>
-                </div>
-                <div className={style.message}>
-                    <span className={`${style.text} ${style.speechBubble}`}>
-                        lorem Ipsum ho ho ho
-                    </span>
-                </div>
-                <div className={style.message}>
-                    <span className={`${style.text} ${style.speechBubble}`}>
-                        lorem Ipsum ho ho ho
-                    </span>
-                </div>
+                { dialogMessage }
             </div>
         </div>
 )

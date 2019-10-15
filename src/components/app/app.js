@@ -9,15 +9,16 @@ import Music from '../music/music';
 import Settings from '../settings/settings';
 import { Route, Switch } from 'react-router-dom';
 
-const App = () => {
+
+const App = (props) => {
     return(
     <div className = {style.appWrapper}>
         <Header />
         <NavBar />
         <Switch>
             <div className={style.appWrapperContent}>
-                <Route path='/profile' component={Profile} />
-                <Route path='/dialogs' component={Dialogs} />
+                <Route path='/profile' render={() => <Profile posts={props.state.profilePage.posts}/>} />
+                <Route path='/dialogs' render={() => <Dialogs dialogsPage={props.state.dialogsPage}/>} />
                 <Route path='/news' component={News} />
                 <Route path='/setting' component={Settings} />
                 <Route path='/music' component={Music} />
