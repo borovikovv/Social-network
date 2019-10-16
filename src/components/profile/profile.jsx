@@ -5,13 +5,14 @@ import ava from '../../img/AVA.jpeg';
 
 const Profile = (props) => {
 
-    const { addPost, posts } = props;
+    const { posts, newPostText} = props.profilePage;
     return(
         <div className = {style.profile}>
             <div className={style.imageContainer}>
                 <img className={style.img} src={ava} alt='img'/>
             </div>
-            <MyPosts addPost={addPost} posts={posts} />
+            <MyPosts newPostText={newPostText}
+                    posts={posts} />
         </div>
     )
 }

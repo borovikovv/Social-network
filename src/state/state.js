@@ -24,19 +24,26 @@ let state = {
             {id: 1, text: 'Hello world'},
             {id: 2, text: 'I am working today'},
             {id: 3, text: 'Smell my hand, bro...'},
-        ]
+        ],
+        newPostText: ''
     }
 };
 
 let newId = 6;
 
-export const addPost = (messageText) => {
+export let updatePostText = (text) => {
+    state.profilePage.newPostText = text;
+    rerenderEntireTree(state);
+};
+
+export const addPost = () => {
     let newPost = {
         id: newId++,
-        text: messageText
+        text: state.profilePage.newPostText
     };
     state.profilePage.posts.push(newPost);
     rerenderEntireTree(state);
+    state.profilePage.newPostText = '';
 };
 
 export default state;

@@ -17,8 +17,10 @@ const App = (props) => {
         <NavBar />
         <Switch>
             <div className={style.appWrapperContent}>
-                <Route path='/profile' render={() => <Profile posts={props.state.profilePage.posts} addPost={props.addPost}/>} />
-                <Route path='/dialogs' render={() => <Dialogs dialogsPage={props.state.dialogsPage}/>} />
+                <Route path='/profile' render={() => 
+                    <Profile profilePage={props.state.profilePage} /> } />
+                <Route path='/dialogs' render={() => 
+                    <Dialogs dialogsPage={props.state.dialogsPage}/>} />
                 <Route path='/news' component={News} />
                 <Route path='/setting' component={Settings} />
                 <Route path='/music' component={Music} />
