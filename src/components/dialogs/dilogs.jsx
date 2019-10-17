@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import style from  './dialogs.module.css';
+import { addMessageBodyCreator, sendMessageCreator } from '../../store//store';
 
-const Dialogs = ({dialogsPage}) => {
+const Dialogs = ({dialogsPage, dispatch}) => {
+    const { messages, dialogs, newMessageText } = dialogsPage;
 
-    const { messages, dialogs } = dialogsPage;
+    const onMessageAdd = () => {
+        dispatch(sendMessageCreator(newMessageText));
+    };
+    const onAddedMessageText = (e) => {
+        let text = e.target.value;
+        dispatch(addMessageBodyCreator(text));
+    };
 
     const dialogPerson = dialogs.map((person) => {
         return  <div key={person.id} className={style.dialog}>
@@ -23,16 +31,25 @@ const Dialogs = ({dialogsPage}) => {
                 </div>
     });
     return (
-        <div className={style.component}>
-            <div className={style.dialogs}>
-                { dialogPerson }
-            </div>
+        <Fragment>
+            <div className={style.component}>
+                <div className={style.dialogs}>
+                    { dialogPerson }
+                </div>
 
-            <div className={style.messages}>
-                { dialogMessage }
+                <div className={style.messages}>
+                    { dialogMessage }
+                </div>
             </div>
-        </div>
-)
+            <div className={style.containerTextarea}>
+                <textarea  className={style.textarea}
+                        value={newMessageText}
+                        onChange={onAddedMessageText}
+                        placeholder=' Type message text...' />
+                <button onClick={ onMessageAdd } className={style.button}>Send message</button>
+            </div>
+    </Fragment>
+    )
 };
 
 export default Dialogs;

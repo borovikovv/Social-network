@@ -18,9 +18,11 @@ const App = (props) => {
         <Switch>
             <div className={style.appWrapperContent}>
                 <Route path='/profile' render={() => 
-                    <Profile profilePage={props.state.profilePage} /> } />
+                    <Profile profilePage={props.state.profilePage}
+                             dispatch={props.dispatch} /> } />
                 <Route path='/dialogs' render={() => 
-                    <Dialogs dialogsPage={props.state.dialogsPage}/>} />
+                    <Dialogs dialogsPage={props.state.dialogsPage}
+                             dispatch={props.dispatch}/>} />
                 <Route path='/news' component={News} />
                 <Route path='/setting' component={Settings} />
                 <Route path='/music' component={Music} />

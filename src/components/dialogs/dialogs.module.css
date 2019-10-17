@@ -66,6 +66,36 @@
 	margin-left: -20px;
 }
 
+.button {
+    width: 95px;
+    height: 35px;
+    font-size: 12px;
+    padding: 6px;
+    border: none;
+    border-radius: 4px;
+    margin: 8px 10px 20px 138px;
+    background-color: rgb(77, 142, 196);
+    color: white;
+}
+.button:hover {
+    background-color: rgb(49, 106, 154);
+}
+.textarea {
+    border: 1px solid white;
+    margin-bottom: 10px;
+    border-radius: .4em;
+    margin: 0px 10px 0px 10px;
+    font-size: 20px;
+}
+
+.containerTextarea {
+    display: grid;
+    flex-direction: column;
+    justify-content: start;
+    margin-top: 50px;  
+    margin-left: 20px;
+}
+
 @media( max-width: 576px) {
     .component {
         grid-template-columns: 120px 3fr;
