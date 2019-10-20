@@ -6,7 +6,7 @@ const NavBar = () => {
     return(
         <div className = {style.nav}>
             <div className = {style.item}>
-                <Link to='/profile'>Profile</Link>
+                <Link to='/'>Profile</Link>
             </div>
             <div className = {style.item}>
                 <Link to='/dialogs'>Messages</Link>
@@ -18,7 +18,7 @@ const NavBar = () => {
                 <Link to='/music'>Music</Link>
             </div>
             <div className = {style.item}>
-                <Link to='setting'>Settings</Link>
+                <Link to='/setting'>Settings</Link>
             </div>
         </div>
     )

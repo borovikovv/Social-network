@@ -3,7 +3,7 @@
     grid-template-areas:
     "h h h"
     "n p p";
-    grid-template-rows:  30px 100%;
+    grid-template-rows:  30px 3fr;
     grid-template-columns: 150px 2fr;
     grid-gap: 10px; 
 

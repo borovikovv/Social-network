@@ -1,16 +1,17 @@
 import React, { Fragment } from 'react';
 import style from  './dialogs.module.css';
-import { addMessageBodyCreator, sendMessageCreator } from '../../store//store';
 
-const Dialogs = ({dialogsPage, dispatch}) => {
-    const { messages, dialogs, newMessageText } = dialogsPage;
+
+const Dialogs = (props) => {
+    const { messages, dialogs, newMessageText, addMessageText,
+            sendMessage } = props;
 
     const onMessageAdd = () => {
-        dispatch(sendMessageCreator(newMessageText));
+        sendMessage(newMessageText);
     };
     const onAddedMessageText = (e) => {
         let text = e.target.value;
-        dispatch(addMessageBodyCreator(text));
+        addMessageText(text);
     };
 
     const dialogPerson = dialogs.map((person) => {
@@ -30,6 +31,7 @@ const Dialogs = ({dialogsPage, dispatch}) => {
                     </span>
                 </div>
     });
+
     return (
         <Fragment>
             <div className={style.component}>
@@ -48,7 +50,7 @@ const Dialogs = ({dialogsPage, dispatch}) => {
                         placeholder=' Type message text...' />
                 <button onClick={ onMessageAdd } className={style.button}>Send message</button>
             </div>
-    </Fragment>
+        </Fragment>
     )
 };
 

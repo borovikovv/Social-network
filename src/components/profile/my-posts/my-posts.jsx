@@ -1,19 +1,19 @@
 import React from 'react';
 import style from './my-posts.module.css';
 import Post from './post/post';
-import { addPostActionCreator, onPostChangedActionCreator } from '../../../store/store';
 
 const MyPosts = (props) => {
-    const { newPostText, posts } = props;
+    const { newPostText, posts, addPost, changePostText } = props;
+
 
     let newPostElement = React.createRef();
     const onPostChanged = () => {
         let text = newPostElement.current.value;
-        props.dispatch(onPostChangedActionCreator(text));
+        changePostText(text);
     };
 
     const onAddedPost = () => {
-        props.dispatch(addPostActionCreator());
+        addPost(newPostText);
     };
 
 

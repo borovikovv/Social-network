@@ -1,19 +1,16 @@
 import React from 'react';
 import style from './profile.module.css';
-import MyPosts from './my-posts/my-posts';
+import MyPostsContainer from './my-posts/my-posts-container';
 import ava from '../../img/AVA.jpeg';
 
-const Profile = (props) => {
-    const { posts, newPostText} = props.profilePage;
+const Profile = () => {
 
     return(
         <div className = {style.profile}>
             <div className={style.imageContainer}>
                 <img className={style.img} src={ava} alt='img'/>
             </div>
-            <MyPosts newPostText={newPostText}
-                     posts={posts}
-                     dispatch={props.dispatch} />
+            <MyPostsContainer />
         </div>
     )
 }
