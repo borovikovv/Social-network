@@ -4,7 +4,7 @@ import style from './news.module.css';
 const News = () => {
     return (
         <div className={style.news}>
-            You don't have News
+            <p className={style.infoText}> You don't have News </p>
         </div>
     )
 };

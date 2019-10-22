@@ -13,4 +13,7 @@
         background: no-repeat url('./../../img/news.png') center/12%
 
     }
+    .infoText {
+        margin-bottom: 200px;
+    }
 }

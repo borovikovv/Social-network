@@ -4,7 +4,7 @@ import style from './music.module.css';
 const Music = () => {
     return (
         <div className={style.music}>
-            You don't have music
+            <p className={style.infoText}> You don't have music </p>
         </div>
     )
 };

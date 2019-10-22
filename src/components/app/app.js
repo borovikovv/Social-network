@@ -8,6 +8,7 @@ import News from '../news/news';
 import Music from '../music/music';
 import Settings from '../settings/settings';
 import { Route, Switch } from 'react-router-dom';
+import UsersContainer from './../users/users-component';
 
 
 const App = () => {
@@ -18,6 +19,7 @@ const App = () => {
         <Switch>
             <nav className={style.appWrapperContent}>
                 <Route path='/' exact component={Profile} />
+                <Route path='/users' component={UsersContainer} />
                 <Route path='/dialogs' component={DialogContainer} />
                 <Route path='/news' component={News} />
                 <Route path='/setting' component={Settings} />

@@ -4,7 +4,7 @@ import style from './setting.module.css';
 const Setting = () => {
     return (
         <div className={style.setting} >
-            <div>You don't have Settings</div>
+            <p className={style.infoText}>You don't have Settings</p>
         </div>
     )
 };

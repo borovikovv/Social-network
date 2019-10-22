@@ -9,6 +9,9 @@ const NavBar = () => {
                 <Link to='/'>Profile</Link>
             </div>
             <div className = {style.item}>
+                <Link to='/users'>Friends</Link>
+            </div>
+            <div className = {style.item}>
                 <Link to='/dialogs'>Messages</Link>
             </div>
             <div className = {style.item}>

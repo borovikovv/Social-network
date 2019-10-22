@@ -11,6 +11,8 @@
 @media(min-width: 768px){
     .setting{
         background: no-repeat url('./../../img/setting.png') center/12%
-
+    }
+    .infoText {
+        margin-bottom: 200px;
     }
 }
