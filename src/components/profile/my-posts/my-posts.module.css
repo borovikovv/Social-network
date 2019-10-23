@@ -1,3 +1,7 @@
+.myPosts {
+    margin-left: 30px;
+}
+
 .myPosts > .createPost {
     display: grid;
     justify-content: start;
