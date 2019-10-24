@@ -1,9 +1,11 @@
 import React, { Component} from 'react';
 import Users from './users';
 import { connect } from 'react-redux';
-import { followCreator, unfollowCreator, getUsersCountCreator, 
-    setUsersCreator, setCurrentPageCreator } from '../../redux/usersReducer';
+import { follow, unfollow, getUsersCount, 
+    setUsers, setCurrentPage, toggleLoading } from '../../redux/usersReducer';
 import * as axios from 'axios';
+import Spinner from '../../common/spinner/spinner';
+import Paginator from '../../common/paginator/paginator';
 
 
 class UsersContainer extends Component {
@@ -11,6 +13,7 @@ class UsersContainer extends Component {
     componentDidMount() {
         axios.get('https://social-network.samuraijs.com/api/1.0/users')
             .then(response => {
+                this.props.toggleLoading();
                 this.props.setUsers(response.data.items);
                 this.props.getUsersCount(response.data.totalCount);
             });
@@ -20,20 +23,29 @@ class UsersContainer extends Component {
         this.props.setCurrentPage(num)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
         .then(response => {
+            this.props.toggleLoading();
             this.props.setUsers(response.data.items);
         });
     };
 
     render() {
-        const { users, currentPage, pageSize, totalUserCount, follow, unfollow } = this.props;
+        const { users, currentPage, pageSize, 
+                totalItemsCount, follow, unfollow, loading } = this.props;
+                
+        if(loading) {
+            return <Spinner />
+        }
         return (
-            <Users  users={users}
+            <>
+                <Paginator
                     currentPage={currentPage}
                     pageSize={pageSize} 
-                    totalUserCount={totalUserCount} 
-                    follow={follow} 
-                    unfollow={unfollow}
+                    totalItemsCount={totalItemsCount}
                     onPageChanged={this.onPageChanged} />
+                <Users  users={users}
+                        follow={follow} 
+                        unfollow={unfollow} />
+            </>
         )
     }
 }
@@ -43,28 +55,18 @@ const mapStateToProps = ({usersReducer}) => {
         users: usersReducer.users,
         currentPage: usersReducer.currentPage,
         pageSize: usersReducer.pageSize,
-        totalUserCount: usersReducer.totalUserCount
+        totalItemsCount: usersReducer.totalItemsCount,
+        loading: usersReducer.loading
     };
 };
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        follow: (userId) => {
-            dispatch(followCreator(userId));
-        },
-        unfollow: (userId) => {
-            dispatch(unfollowCreator(userId));
-        },
-        setUsers: (users) => {
-            dispatch(setUsersCreator(users));
-        },
-        setCurrentPage: (count) => {
-            dispatch(setCurrentPageCreator(count));
-        },
-        getUsersCount: (count) => {
-            dispatch(getUsersCountCreator(count));
-        }
-    };
+const mapDispatchToProps = {
+    follow,
+    unfollow,
+    setUsers,
+    setCurrentPage,
+    getUsersCount,
+    toggleLoading
 };
 
 export default connect( mapStateToProps, mapDispatchToProps)(UsersContainer);

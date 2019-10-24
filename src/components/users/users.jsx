@@ -1,34 +1,21 @@
 import React from 'react';
 import style from './users.module.css';
 import image from '../../img/no-image.jpeg';
+import { Link } from 'react-router-dom';
 
 const Users = (props) => {
 
 
-    const { users, currentPage, pageSize, totalUserCount, follow, unfollow, onPageChanged } = props;
+    const { users, follow, unfollow } = props;
 
-    let PageCount = Math.ceil(totalUserCount / pageSize);
-    let pages = [];
-    for(let i = 1; i <= PageCount; i++) {
-        pages.push(i);
-    }
+    
     return <div className={style.users}>
-        <div className={style.pagesPagination}>
-            {
-                pages.map(page => {
-                    return <span key={page} 
-                                className={page === currentPage && style.pagePagination}
-                                 onClick={()=> onPageChanged(page)}
-                                 style={{padding: '5px 10px 5px 10px'}}>
-                                {page}
-                            </span>
-                })
-            }
-        </div>
         {
             users.map(user => <li key={user.id} className={style.user}>
                 <div className={style.image}>
-                    <img className={style.photos} src={user.photos.small != null ? user.photos.small : image} alt='user' />
+                    <Link to={`profile/${user.id}`}>
+                        <img className={style.photos} src={user.photos.small != null ? user.photos.small : image} alt='user' />
+                    </Link>    
                 </div>
                 <div className={style.info}>
                     <span className={style.name}>{user.name}</span>

@@ -1,0 +1,34 @@
+.pagesPagination {
+    display: flex;
+    cursor: pointer;
+    justify-content: center;
+    color: rgb(104, 103, 103);
+}
+
+.pagePagination {
+    color: rgb(63, 63, 63);
+    font-size: 20px;
+    font-weight: bold;
+    border: 1px solid rgb(63, 63, 63);
+    border-radius: 50%;
+}
+.btn {
+    width: 40px;
+    height: 25px;
+    border: grey solid 1px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0);
+    color: grey;
+    font-size: 10px;
+}
+.btn:hover {
+
+}
+
+@media( max-width: 564px) {
+
+    .pagesPagination {
+        margin-left: 10px;
+        justify-content: start;
+    }
+}

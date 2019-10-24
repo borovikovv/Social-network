@@ -2,6 +2,7 @@ import image from '../img/AVA.jpeg';
 let newId = 6;
 const ADD_POST = 'ADD_POST';
 const UPDATE_POST_TEXT = 'UPDATE_POST_TEXT';
+const SET_USER_PROFILE = 'SET_USER_PROFILE';
 
 let initialState = {
     posts: [
@@ -9,8 +10,11 @@ let initialState = {
         {id: 2, text: 'I am working today'},
         {id: 3, text: 'Smell my hand, bro...'},
     ],
-    newPostText: ''
+    newPostText: '',
+    userProfile: []
 };
+
+
 const profileReducer = (state = initialState, action) => {
     switch(action.type) {
         case ADD_POST:
@@ -28,18 +32,22 @@ const profileReducer = (state = initialState, action) => {
             return {
                 ...state,
                 newPostText: action.payload
-            }
-            
+            };
+        case SET_USER_PROFILE:
+            return {
+                ...state,
+                userProfile: action.payload
+            };
         default:
             return state;
     }
 };
-
 export const addPostActionCreator = (text) => ({ type: ADD_POST, payload: text });
 
 export const onPostChangedActionCreator = (text) => ({
     type: UPDATE_POST_TEXT,
     payload: text
 });
+export const setUserProfile = (userProfile) => ({type: SET_USER_PROFILE, payload: userProfile});
 
 export default profileReducer;

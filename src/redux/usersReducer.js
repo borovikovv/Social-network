@@ -3,13 +3,15 @@ const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const GET_USERS_COUNT = 'GET_USERS_COUNT';
+const TOGGLE_LOADING = 'TOGGLE_LOADING';
 
 
 let initialState = {
     users: [],
     currentPage: 1,
-    pageSize: 10,
-    totalUserCount: 100
+    pageSize: 7,
+    totalItemsCount: 0,
+    loading: true
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -36,7 +38,9 @@ const usersReducer = (state = initialState, action) => {
             };
         case SET_USERS:
             return {
-                ...state, users: [...action.payload]
+                ...state,
+                loading: false,
+                users: [...action.payload]
             };
             case SET_CURRENT_PAGE:
                 return {
@@ -46,17 +50,23 @@ const usersReducer = (state = initialState, action) => {
             case GET_USERS_COUNT:
                 return {
                     ...state,
-                    totalUserCount: action.payload
+                    totalItemsCount: action.payload
                 }
+            case TOGGLE_LOADING:
+                return {
+                    ...state,
+                    loading: true
+                };
         default:
             return state;
     }
 };
 
-export const followCreator = (userId) => ({type: FOLLOW, payload: userId});
-export const unfollowCreator = (userId) => ({type: UNFOLLOW, payload: userId});
-export const setUsersCreator = (users) => ({type: SET_USERS, payload: users});
-export const setCurrentPageCreator = (count) => ({type: SET_CURRENT_PAGE, payload: count});
-export const getUsersCountCreator = (count) => ({type: GET_USERS_COUNT, payload: count});
+export const follow = (userId) => ({type: FOLLOW, payload: userId});
+export const unfollow = (userId) => ({type: UNFOLLOW, payload: userId});
+export const setUsers = (users) => ({type: SET_USERS, payload: users});
+export const setCurrentPage = (count) => ({type: SET_CURRENT_PAGE, payload: count});
+export const getUsersCount = (count) => ({type: GET_USERS_COUNT, payload: count});
+export const toggleLoading = () => ({type: TOGGLE_LOADING});
 
 export default usersReducer;

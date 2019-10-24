@@ -44,20 +44,6 @@
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
 }
-.pagesPagination {
-    display: flex;
-    cursor: pointer;
-    justify-content: center;
-    color: rgb(104, 103, 103);
-}
-
-.pagePagination {
-    color: rgb(63, 63, 63);
-    font-size: 20px;
-    font-weight: bold;
-    border: 1px solid rgb(63, 63, 63);
-    border-radius: 50%;
-}
 
 @media( max-width: 564px) {
     .user {
@@ -69,9 +55,5 @@
     }
     .info {
         margin-left: 0px;
-    }
-    .pagesPagination {
-        margin-left: -30px;
-        justify-content: start;
     }
 }

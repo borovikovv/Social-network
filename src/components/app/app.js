@@ -1,14 +1,14 @@
 import React from 'react';
 import Header from '../header/header';
 import NavBar from '../nav-bar/nav-bar';
-import Profile from '../profile/profile';
+import ProfileContainer from '../profile/profile';
 import style from './app.module.css';
 import DialogContainer from '../dialogs/dialogs-container';
 import News from '../news/news';
 import Music from '../music/music';
 import Settings from '../settings/settings';
 import { Route, Switch } from 'react-router-dom';
-import UsersContainer from './../users/users-component';
+import UsersContainer from './../users/users-container';
 
 
 const App = () => {
@@ -18,7 +18,7 @@ const App = () => {
         <NavBar />
         <Switch>
             <nav className={style.appWrapperContent}>
-                <Route path='/' exact component={Profile} />
+                <Route path='/' exact component={ProfileContainer} />
                 <Route path='/users' component={UsersContainer} />
                 <Route path='/dialogs' component={DialogContainer} />
                 <Route path='/news' component={News} />
