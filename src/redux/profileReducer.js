@@ -11,7 +11,7 @@ let initialState = {
         {id: 3, text: 'Smell my hand, bro...'},
     ],
     newPostText: '',
-    userProfile: []
+    userProfile: null
 };
 
 
