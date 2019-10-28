@@ -9,7 +9,7 @@
     padding: 20px 10px 30px 10px;
     align-items: center;
     border-bottom: rgba(84, 82, 82, 0.242) 1px solid;
-    justify-content: start;
+    /* justify-content: start; */
     margin: 10px 20px 10px 20px;
 }
 .info {

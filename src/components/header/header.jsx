@@ -7,7 +7,7 @@ const Header = () => {
     return(
         <div className = {style.header}>
             <div className = {style.img}>
-                <Link to='/'>
+                <Link to='/profile'>
                     <img src={icon} alt='img' />
                 </Link>
             </div>

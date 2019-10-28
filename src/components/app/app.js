@@ -18,7 +18,7 @@ const App = () => {
         <NavBar />
         <Switch>
             <nav className={style.appWrapperContent}>
-                <Route path='/' exact component={ProfileContainer} />
+                <Route path='/profile/:userId?' exact component={ProfileContainer} />
                 <Route path='/users' component={UsersContainer} />
                 <Route path='/dialogs' component={DialogContainer} />
                 <Route path='/news' component={News} />
