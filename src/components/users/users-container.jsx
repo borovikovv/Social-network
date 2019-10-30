@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { follow, unfollow, getUsersCount, 
     setUsers, setCurrentPage, toggleLoading } from '../../redux/usersReducer';
 import * as axios from 'axios';
-import Spinner from '../../common/spinner/spinner';
-import Paginator from '../../common/paginator/paginator';
+import Spinner from '../common/spinner/spinner';
+import Paginator from '../common/paginator/paginator';
 
 
 class UsersContainer extends Component {

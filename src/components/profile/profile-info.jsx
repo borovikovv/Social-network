@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './profile-info.module.css';
 import ava from '../../img/AVA.jpeg';
-import Spinner from '../../common/spinner/spinner';
+import Spinner from '../common/spinner/spinner';
 
 const ProfileInfo = ({userProfile}) => {
     if(!userProfile){

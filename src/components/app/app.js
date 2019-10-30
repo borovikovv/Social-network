@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from '../header/header';
+import HeaderContainer from '../header/header-container';
 import NavBar from '../nav-bar/nav-bar';
 import ProfileContainer from '../profile/profile-container';
 import style from './app.module.css';
@@ -9,15 +9,17 @@ import Music from '../music/music';
 import Settings from '../settings/settings';
 import { Route, Switch } from 'react-router-dom';
 import UsersContainer from './../users/users-container';
+import LoginForm from "../login/login-form";
 
 
 const App = () => {
     return(
     <div className = {style.appWrapper}>
-        <Header />
+        <HeaderContainer />
         <NavBar />
         <Switch>
             <nav className={style.appWrapperContent}>
+                <Route path='/login' component={LoginForm}/>
                 <Route path='/profile/:userId?' exact component={ProfileContainer} />
                 <Route path='/users' component={UsersContainer} />
                 <Route path='/dialogs' component={DialogContainer} />

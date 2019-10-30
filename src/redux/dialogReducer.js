@@ -23,27 +23,28 @@ let initialState = {
 };
 
 const dialogReducer = (state = initialState, action) => {
-    switch(action.type) {
+    switch (action.type) {
         case SEND_MESSAGE:
             let newMessage = {
-                id: newId++, 
+                id: newId++,
                 text: state.newMessageText
-            };
-            return {
-                ...state,
-                newMessageText: '',
-                messages: [...state.messages, newMessage]
-            }
+        };
+        return {
+            ...state,
+            newMessageText: '',
+            messages: [...state.messages, newMessage]
+        }
         case ADD_MESSAGE_TEXT:
             return {
                 ...state,
                 newMessageText: action.payload
             }
-        default: 
+        default:
             return state;
-    }
+}
 
-};
+}
+;
 
 export const sendMessageCreator = (text) => ({ 
     type: SEND_MESSAGE, 
