@@ -1,36 +1,29 @@
 import React, { Component} from 'react';
 import Users from './users';
 import { connect } from 'react-redux';
-import { follow, unfollow, getUsersCount, 
-    setUsers, setCurrentPage, toggleLoading } from '../../redux/usersReducer';
-import * as axios from 'axios';
+import { requestUsersThunkCreator, changePageThunkCreator,
+    unfollowingSuccess, followingSuccess
+} from '../../redux/usersReducer';
 import Spinner from '../common/spinner/spinner';
 import Paginator from '../common/paginator/paginator';
+import {compose} from "redux";
+import {withAuthRedirect} from "../hoc/with-auth-redirect";
 
 
 class UsersContainer extends Component {
 
     componentDidMount() {
-        axios.get('https://social-network.samuraijs.com/api/1.0/users')
-            .then(response => {
-                this.props.toggleLoading();
-                this.props.setUsers(response.data.items);
-                this.props.getUsersCount(response.data.totalCount);
-            });
+        this.props.requestUsersThunkCreator()
     }
 
     onPageChanged = (num) => {
-        this.props.setCurrentPage(num)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
-        .then(response => {
-            this.props.toggleLoading();
-            this.props.setUsers(response.data.items);
-        });
+        this.props.changePageThunkCreator(num, this.props.pageSize, this.props.currentPage)
     };
 
     render() {
         const { users, currentPage, pageSize, 
-                totalItemsCount, follow, unfollow, loading } = this.props;
+                totalItemsCount, loading, followingIsProgress,
+                unfollowingSuccess, followingSuccess } = this.props;
                 
         if(loading) {
             return <Spinner />
@@ -42,9 +35,11 @@ class UsersContainer extends Component {
                     pageSize={pageSize} 
                     totalItemsCount={totalItemsCount}
                     onPageChanged={this.onPageChanged} />
-                <Users  users={users}
-                        follow={follow} 
-                        unfollow={unfollow} />
+                <Users
+                        followingIsProgress={followingIsProgress}
+                        users={users}
+                        unfollowingSuccess={unfollowingSuccess}
+                        followingSuccess={followingSuccess}/>
             </>
         )
     }
@@ -52,6 +47,7 @@ class UsersContainer extends Component {
 
 const mapStateToProps = ({usersReducer}) => {
     return {
+        followingIsProgress: usersReducer.followingIsProgress,
         users: usersReducer.users,
         currentPage: usersReducer.currentPage,
         pageSize: usersReducer.pageSize,
@@ -61,12 +57,13 @@ const mapStateToProps = ({usersReducer}) => {
 };
 
 const mapDispatchToProps = {
-    follow,
-    unfollow,
-    setUsers,
-    setCurrentPage,
-    getUsersCount,
-    toggleLoading
+    requestUsersThunkCreator,
+    changePageThunkCreator,
+    unfollowingSuccess,
+    followingSuccess
 };
 
-export default connect( mapStateToProps, mapDispatchToProps)(UsersContainer);
+export default compose(
+    withAuthRedirect,
+    connect(mapStateToProps, mapDispatchToProps)
+)(UsersContainer)

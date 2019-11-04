@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 const Users = (props) => {
 
 
-    const { users, follow, unfollow } = props;
+    const { users, followingIsProgress, unfollowingSuccess, followingSuccess } = props;
 
     
     return <div className={style.users}>
@@ -22,9 +22,11 @@ const Users = (props) => {
                     <div className={style.status}>{user.status}</div>
                     <div>
                         {
-                            user.followed 
-                            ? <button onClick={() => {follow(user.id)}} className={style.btn}>Followed</button>
-                            : <button onClick={() => {unfollow(user.id)}} className={style.btn}>Unfollow</button>
+                            user.followed
+                            ? <button disabled={followingIsProgress.some(id => id === user.id)} onClick={() => { unfollowingSuccess(user.id) }
+                            } className={style.btn}>Followed</button>
+                            : <button disabled={followingIsProgress.some(id => id === user.id)}  onClick={() => { followingSuccess(user.id) }
+                            } className={style.btn}>Unfollow</button>
                         }
                     </div>
                 </div>

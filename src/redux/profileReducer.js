@@ -1,4 +1,6 @@
+import { profileAPI } from "../api/api";
 import image from '../img/AVA.jpeg';
+import * as axios from "axios";
 let newId = 6;
 const ADD_POST = 'ADD_POST';
 const UPDATE_POST_TEXT = 'UPDATE_POST_TEXT';
@@ -49,5 +51,12 @@ export const onPostChangedActionCreator = (text) => ({
     payload: text
 });
 export const setUserProfile = (userProfile) => ({type: SET_USER_PROFILE, payload: userProfile});
+
+export const requestUserProfile = (id) => (dispatch) => {
+    profileAPI.requestProfile(id)
+        .then(data => {
+            dispatch(setUserProfile(data));
+        });
+}
 
 export default profileReducer;
