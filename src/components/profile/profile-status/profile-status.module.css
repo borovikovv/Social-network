@@ -1,0 +1,18 @@
+.status > .text{
+    display: flex;
+    justify-content: center;
+    font-family: monospace;
+    margin-right: 50px;
+}
+.inputBlock {
+    display: flex;
+    justify-content: center;
+    margin-right: 50px;
+}
+
+@media(min-width: 768px) {
+    .status > .text {
+        display: grid;
+        justify-content: flex-end;
+    }
+}
