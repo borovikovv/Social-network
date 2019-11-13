@@ -2,7 +2,6 @@ import { profileAPI } from "../api/api";
 import image from '../img/AVA.jpeg';
 let newId = 6;
 const ADD_POST = 'ADD_POST';
-const UPDATE_POST_TEXT = 'UPDATE_POST_TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const GET_USER_STATUS = 'GET_USER_STATUS';
 const UPDATE_USER_STATUS = 'UPDATE_USER_STATUS';
@@ -13,7 +12,6 @@ let initialState = {
         {id: 2, text: 'I am working today'},
         {id: 3, text: 'Smell my hand, bro...'},
     ],
-    newPostText: '',
     userProfile: null,
     status: ''
 };
@@ -24,18 +22,12 @@ const profileReducer = (state = initialState, action) => {
         case ADD_POST:
             let newPost = {
                 id: newId++,
-                text: state.newPostText,
+                text: action.payload,
                 image: image
             };
             return {
                 ...state,
-                posts: [ ...state.posts, newPost ],
-                newPostText: '',
-            };
-        case UPDATE_POST_TEXT:
-            return {
-                ...state,
-                newPostText: action.payload
+                posts: [ ...state.posts, newPost ]
             };
         case SET_USER_PROFILE:
             return {
@@ -56,12 +48,12 @@ const profileReducer = (state = initialState, action) => {
             return state;
     }
 };
-export const addPostActionCreator = (text) => ({ type: ADD_POST, payload: text });
 
-export const onPostChangedActionCreator = (text) => ({
-    type: UPDATE_POST_TEXT,
-    payload: text
+export const addPost = (text) => ({
+   type: ADD_POST,
+   payload: text
 });
+
 export const setUserProfile = (userProfile) => ({type: SET_USER_PROFILE, payload: userProfile});
 
 const getUserStatusAC = (status) => ({
@@ -88,9 +80,7 @@ export const requestUserStatus = (id) => (dispatch) => {
 };
 
 export const updateUserStatus = (status) => (dispatch) => {
-        debugger
     profileAPI.updateStatus(status).then(responce => {
-        debugger
         if(responce.resultCode === 0){
             dispatch(updateUserStatusAC(status))
         };

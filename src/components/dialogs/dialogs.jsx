@@ -1,18 +1,16 @@
 import React, { Fragment } from 'react';
 import style from  './dialogs.module.css';
+import DialogsForm from "./dialogs-form";
 
 
 const Dialogs = (props) => {
-    const { messages, dialogs, newMessageText, addMessageText,
-            sendMessage } = props;
+    const { messages, dialogs, resetDialogsForm, sendMessage } = props;
 
-    const onMessageAdd = () => {
-        sendMessage(newMessageText);
+    const submit = (value) => {
+        sendMessage(value.addMessageText)
+        resetDialogsForm();
     };
-    const onAddedMessageText = (e) => {
-        let text = e.target.value;
-        addMessageText(text);
-    };
+
 
     const dialogPerson = dialogs.map((person) => {
         return  <div key={person.id} className={style.dialog}>
@@ -38,18 +36,11 @@ const Dialogs = (props) => {
                 <div className={style.dialogs}>
                     { dialogPerson }
                 </div>
-
                 <div className={style.messages}>
                     { dialogMessage }
                 </div>
             </div>
-            <div className={style.containerTextarea}>
-                <textarea  className={style.textarea}
-                        value={newMessageText}
-                        onChange={onAddedMessageText}
-                        placeholder=' Type message text...' />
-                <button onClick={ onMessageAdd } className={style.button}>Send message</button>
-            </div>
+            <DialogsForm onSubmit={submit} />
         </Fragment>
     )
 };

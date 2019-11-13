@@ -9,7 +9,7 @@ import Music from '../music/music';
 import Settings from '../settings/settings';
 import { Route, Switch } from 'react-router-dom';
 import UsersContainer from './../users/users-container';
-import LoginForm from "../login/login-form";
+import LoginFormContainer from "../login/login-container";
 
 
 const App = () => {
@@ -19,7 +19,7 @@ const App = () => {
         <NavBar />
         <Switch>
             <nav className={style.appWrapperContent}>
-                <Route path='/login' component={LoginForm}/>
+                <Route path='/login' component={LoginFormContainer}/>
                 <Route path='/profile/:userId?' exact component={ProfileContainer} />
                 <Route path='/users' component={UsersContainer} />
                 <Route path='/dialogs' component={DialogContainer} />

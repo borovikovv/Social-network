@@ -1,0 +1,26 @@
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+.button {
+    width: 82px;
+    font-size: 14px;
+    padding: 6px;
+    border: none;
+    border-radius: 4px;
+    margin: 8px 10px 20px 150px;
+    background-color: rgb(77, 142, 196);
+    color: white;
+}
+.button:hover {
+    background-color: rgb(49, 106, 154);
+}
+.textArea {
+    width: 220px;
+    border: 1px solid white;
+    margin-bottom: 10px;
+    border-radius: .4em;
+    margin: 0px 10px 0px 10px;
+    font-size: 20px;
+}

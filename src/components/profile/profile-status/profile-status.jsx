@@ -7,6 +7,15 @@ export default class ProfileStatus extends Component {
         status: ''
     }
 
+
+    componentDidUpdate(prevProps, presStatus) {
+        if(prevProps.status !== this.props.status) {
+            this.setState({
+                status: prevProps.status
+            })
+        }
+    }
+
     toggleEditMode = () => {
         this.setState(({editMode}) => {
             return {
@@ -31,7 +40,7 @@ export default class ProfileStatus extends Component {
                 {
                     !this.state.editMode &&
                         <div className={style.status}>
-                            <span onDoubleClick={this.toggleEditMode} className={style.text}>{this.props.status}</span>
+                            <span onDoubleClick={this.toggleEditMode} className={style.text}>{this.props.status || '...'}</span>
                         </div>
                 }
                 {

@@ -1,0 +1,30 @@
+.header {
+    text-align: center;
+}
+
+.form {
+    display: grid;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.input {
+    width: 200px;
+    margin-bottom: 7px;
+    border-radius: 5px;
+}
+
+.checkbox {
+    margin-bottom: 15px;
+    margin-right: 7px;
+}
+
+.button {
+    background-color:  rgb(93, 173, 238);
+    border-radius: 5px;
+    height: 28px;
+}
+
+.button:hover {
+    background-color: steelblue;
+}

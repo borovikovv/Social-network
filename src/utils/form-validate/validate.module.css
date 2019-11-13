@@ -1,0 +1,12 @@
+
+.formControl > .error {
+    border: 2px solid tomato;
+}
+.error {
+    border: 2px solid tomato;
+}
+
+.message {
+    font-weight: bold;
+    color: tomato;
+}
