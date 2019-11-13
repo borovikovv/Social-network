@@ -1,8 +1,7 @@
 
-.formControl > .error {
-    border: 2px solid tomato;
-}
 .error {
+    border-radius: 5px;
+    height: 35px;
     border: 2px solid tomato;
 }
 
