@@ -8,6 +8,13 @@ import Spinner from '../common/spinner/spinner';
 import Paginator from '../common/paginator/paginator';
 import {compose} from "redux";
 import {withAuthRedirect} from "../hoc/with-auth-redirect";
+import {
+    getCurrentPage,
+    getFollowingIsProgress, getLoading,
+    getPageSize,
+    getTotalItemsCount,
+    getUsers
+} from "../../selectors/user-selectors";
 
 
 class UsersContainer extends Component {
@@ -45,14 +52,14 @@ class UsersContainer extends Component {
     }
 }
 
-const mapStateToProps = ({usersReducer}) => {
+const mapStateToProps = (state) => {
     return {
-        followingIsProgress: usersReducer.followingIsProgress,
-        users: usersReducer.users,
-        currentPage: usersReducer.currentPage,
-        pageSize: usersReducer.pageSize,
-        totalItemsCount: usersReducer.totalItemsCount,
-        loading: usersReducer.loading
+        followingIsProgress: getFollowingIsProgress(state),
+        users: getUsers(state),
+        currentPage: getCurrentPage(state),
+        pageSize: getPageSize(state),
+        totalItemsCount: getTotalItemsCount(state),
+        loading: getLoading(state)
     };
 };
 
