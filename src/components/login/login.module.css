@@ -24,6 +24,10 @@
     border-radius: 5px;
     height: 28px;
 }
+.error {
+    font-weight: bold;
+    color: tomato;
+}
 
 .button:hover {
     background-color: steelblue;

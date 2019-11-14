@@ -26,8 +26,15 @@ export const userAPI = {
 };
 
 export const authAPI = {
-    login() {
-        return instance.get(`https://social-network.samuraijs.com/api/1.0/auth/me`);
+    me() {
+        return instance.get(`/auth/me`);
+    },
+    login(email, password, rememberMe) {
+        return instance.post(`/auth/login`,
+            { email, password, rememberMe });
+    },
+    logout() {
+        return instance.delete(`/auth/login`);
     }
 };
 

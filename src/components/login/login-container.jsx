@@ -1,33 +1,39 @@
 import React, { Component } from 'react';
 import Login from './login-form';
-import { reset } from 'redux-form';
 import {connect} from "react-redux";
+import {login} from "../../redux/aythReducer";
+import {compose} from "redux";
+import {withRouter} from "react-router-dom";
 
 class LoginFormContainer extends Component {
 
     submit = (value) => {
-        console.log(value)
-        this.props.resetLoginForm();
+        this.props.login(value.email, value.password, value.rememberMe);
     };
 
     render() {
+        const { isAuth } = this.props;
         return (
-            <Login onSubmit={this.submit}/>
+            <Login isAuth={isAuth} onSubmit={this.submit}/>
         )
     }
 }
 
-const mapStateToProps = () => {
+const mapStateToProps = ({auth}) => {
     return {
+        isAuth: auth.isAuth
     }
-}
+};
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        resetLoginForm: () => {
-            dispatch(reset('login'));
+        login: (email, password, rememberMe) => {
+            dispatch(login(email, password, rememberMe));
         }
     }
-}
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginFormContainer);
+export default compose(
+    withRouter,
+    connect(mapStateToProps, mapDispatchToProps))
+(LoginFormContainer);

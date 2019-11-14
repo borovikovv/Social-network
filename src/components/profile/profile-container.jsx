@@ -9,9 +9,14 @@ import { withRouter } from 'react-router-dom';
 class ProfileContainer extends Component {
 
     componentDidMount() {
-        const { match, requestUserProfile, requestUserStatus } = this.props;
+        const { match, requestUserProfile, requestUserStatus, initializationUserId } = this.props;
         let userId = match.params.userId;
-        if (!userId) userId = 4978;
+        if (!userId) {
+            userId = initializationUserId;
+            if(!userId) {
+                this.props.history.push('/');
+            }
+        }
         requestUserProfile(userId)
         requestUserStatus(userId)
     }
@@ -29,10 +34,11 @@ class ProfileContainer extends Component {
     }
 }
 
-const mapStateToProps = ({profileReducer}) => {
+const mapStateToProps = (state) => {
     return {
-        userProfile: profileReducer.userProfile,
-        status: profileReducer.status
+        initializationUserId: state.auth.userId,
+        userProfile: state.profileReducer.userProfile,
+        status: state.profileReducer.status
     }
 }
 
