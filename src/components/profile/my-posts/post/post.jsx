@@ -11,6 +11,6 @@ const Post = ({message}) => {
             <div className={style.text}>{message}</div>
         </div>
     )
-}
+};
 
 export default Post;

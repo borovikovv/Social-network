@@ -1,4 +1,4 @@
-import React, { Component} from 'react';
+import React, { PureComponent } from 'react';
 import Users from './users';
 import { connect } from 'react-redux';
 import { requestUsersThunkCreator, changePageThunkCreator,
@@ -17,7 +17,7 @@ import {
 } from "../../selectors/user-selectors";
 
 
-class UsersContainer extends Component {
+class UsersContainer extends PureComponent {
 
     componentDidMount() {
         this.props.requestUsersThunkCreator()

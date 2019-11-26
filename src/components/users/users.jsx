@@ -7,7 +7,6 @@ const Users = (props) => {
 
 
     const { users, followingIsProgress, unfollowingSuccess, followingSuccess } = props;
-
     
     return <div className={style.users}>
         {
@@ -23,9 +22,9 @@ const Users = (props) => {
                     <div>
                         {
                             user.followed
-                            ? <button disabled={followingIsProgress.some(id => id === user.id)} onClick={() => { unfollowingSuccess(user.id) }
+                            ? <button disabled={followingIsProgress.find((id) => id === user.id)} onClick={() => { unfollowingSuccess(user.id) }
                             } className={style.btn}>Followed</button>
-                            : <button disabled={followingIsProgress.some(id => id === user.id)}  onClick={() => { followingSuccess(user.id) }
+                            : <button disabled={followingIsProgress.find((id) => id === user.id)}  onClick={() => { followingSuccess(user.id) }
                             } className={style.btn}>Unfollow</button>
                         }
                     </div>
