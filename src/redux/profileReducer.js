@@ -5,6 +5,7 @@ const ADD_POST = 'ADD_POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const GET_USER_STATUS = 'GET_USER_STATUS';
 const UPDATE_USER_STATUS = 'UPDATE_USER_STATUS';
+const UPDATE_PROFILE_PHOTO = 'UPDATE_PROFILE_PHOTO';
 
 let initialState = {
     posts: [
@@ -43,7 +44,12 @@ const profileReducer = (state = initialState, action) => {
             return {
                 ...state,
                 status: action.payload
-            }
+            };
+        case UPDATE_PROFILE_PHOTO:
+            return {
+                ...state,
+                userProfile: {...state.userProfile, photos: action.payload}
+            };
         default:
             return state;
     }
@@ -55,6 +61,7 @@ export const addPost = (text) => ({
 });
 
 export const setUserProfile = (userProfile) => ({type: SET_USER_PROFILE, payload: userProfile});
+const updateProfilePhotoSuccess = (photo) => ({type: UPDATE_PROFILE_PHOTO, payload: photo});
 
 const getUserStatusAC = (status) => ({
     type: GET_USER_STATUS,
@@ -82,6 +89,13 @@ export const updateUserStatus = (status) => async (dispatch) => {
     let resolve = await profileAPI.updateStatus(status);
     if (resolve.resultCode === 0) {
         dispatch(updateUserStatusAC(status));
+    }
+};
+
+export const updateProfilePhoto = (photo) => async (dispatch) => {
+    let resolve = await profileAPI.updatePhoto(photo);
+    if (resolve.resultCode === 0) {
+        dispatch(updateProfilePhotoSuccess(resolve.data.data.photos));
     }
 };
 
