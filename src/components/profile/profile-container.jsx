@@ -3,7 +3,13 @@ import Profile from './profile';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import {toggleLoading } from '../../redux/usersReducer';
-import {requestUserProfile, requestUserStatus, updateProfilePhoto, updateUserStatus} from '../../redux/profileReducer';
+import {
+    requestUserProfile,
+    requestUserStatus,
+    updateProfileInfo,
+    updateProfilePhoto,
+    updateUserStatus
+} from '../../redux/profileReducer';
 import { withRouter } from 'react-router-dom';
 
 class ProfileContainer extends Component {
@@ -17,7 +23,7 @@ class ProfileContainer extends Component {
                 this.props.history.push('/');
             }
         }
-        requestUserProfile(userId)
+        requestUserProfile(userId);
         requestUserStatus(userId)
     }
 
@@ -33,13 +39,14 @@ class ProfileContainer extends Component {
 
     render() {
 
-        const {userProfile, status, updateUserStatus } = this.props;
+        const {userProfile, status, updateUserStatus, updateProfilePhoto, updateProfileInfo} = this.props;
         return (
             <div>
                 <Profile {...this.props} status={status}
                          isOwner={!this.props.match.params.userId}
                          userProfile={userProfile}
                          updateUserStatus={updateUserStatus}
+                         updateProfileInfo={updateProfileInfo}
                          updatePhoto={updateProfilePhoto}/>
             </div>
         )
@@ -52,9 +59,10 @@ const mapStateToProps = (state) => {
         userProfile: state.profileReducer.userProfile,
         status: state.profileReducer.status
     }
-}
+};
 
 export default compose(
-    connect(mapStateToProps, {toggleLoading, requestUserProfile, requestUserStatus, updateUserStatus, updateProfilePhoto}),
+    connect(mapStateToProps, {toggleLoading, updateProfileInfo,
+        requestUserProfile, requestUserStatus, updateUserStatus, updateProfilePhoto}),
     withRouter
     )(ProfileContainer);

@@ -99,4 +99,15 @@ export const updateProfilePhoto = (photo) => async (dispatch) => {
     }
 };
 
+export const updateProfileInfo = (profile) => async (dispatch, getStore) => {
+    const userId = getStore().auth.userId;
+    let resolve = await profileAPI.updateProfile(profile);
+    if (resolve.data.resultCode === 0) {
+        profileAPI.requestProfile(userId)
+            .then(data => {
+                dispatch(setUserProfile(data));
+            });
+    }
+};
+
 export default profileReducer;
