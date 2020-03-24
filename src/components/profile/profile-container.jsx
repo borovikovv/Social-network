@@ -17,8 +17,8 @@ class ProfileContainer extends Component {
                 this.props.history.push('/');
             }
         }
-        requestUserProfile(userId)
-        requestUserStatus(userId)
+        requestUserProfile(userId);
+        requestUserStatus(userId);
     }
 
     render() {
@@ -40,7 +40,7 @@ const mapStateToProps = (state) => {
         userProfile: state.profileReducer.userProfile,
         status: state.profileReducer.status
     }
-}
+};
 
 export default compose(
     connect(mapStateToProps, {toggleLoading, requestUserProfile, requestUserStatus, updateUserStatus}),
