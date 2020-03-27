@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import {Field, reduxForm} from 'redux-form';
 import style from './login.module.css';
-import {Input} from '../../utils/form-validate/input-validate';
+import {createField, Input} from '../../utils/form-validate/input-validate';
 import {email, required} from "../../utils/form-validate/validate";
 import { Redirect } from "react-router-dom";
 
@@ -45,6 +45,8 @@ const LoginForm = (props) => {
                         <span className={style.error}>{props.error}</span>
                     </div>
                 }
+                {props.captchaURL && <img src={props.captchaURL} alt='captcha' />}
+                {props.captchaURL && createField('type code from image', 'captcha', [required], Input)}
                 <button className={style.button} type={'submit'}>Login</button>
             </form>
         </Fragment>

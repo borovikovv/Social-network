@@ -8,32 +8,34 @@ import {withRouter} from "react-router-dom";
 class LoginFormContainer extends Component {
 
     submit = (value) => {
-        this.props.login(value.email, value.password, value.rememberMe);
+        debugger;
+        this.props.login(value.email, value.password, value.rememberMe, value.captcha);
     };
 
     render() {
-        const { isAuth } = this.props;
+        const { isAuth, captchaURL } = this.props;
         return (
-            <Login isAuth={isAuth} onSubmit={this.submit}/>
+            <Login captchaURL={captchaURL} isAuth={isAuth} onSubmit={this.submit}/>
         )
     }
 }
 
 const mapStateToProps = ({auth}) => {
     return {
-        isAuth: auth.isAuth
+        isAuth: auth.isAuth,
+        captchaURL: auth.captchaURL
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        login: (email, password, rememberMe) => {
-            dispatch(login(email, password, rememberMe));
+        login: (email, password, rememberMe, captcha) => {
+            dispatch(login(email, password, rememberMe, captcha));
         }
     }
 };
 
 export default compose(
     withRouter,
-    connect(mapStateToProps, mapDispatchToProps))
-(LoginFormContainer);
+    connect(mapStateToProps, mapDispatchToProps)
+    )(LoginFormContainer);
