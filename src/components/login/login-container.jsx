@@ -4,12 +4,13 @@ import {connect} from "react-redux";
 import {login} from "../../redux/aythReducer";
 import {compose} from "redux";
 import {withRouter} from "react-router-dom";
+import {reset} from "redux-form";
 
 class LoginFormContainer extends Component {
 
     submit = (value) => {
-        debugger;
         this.props.login(value.email, value.password, value.rememberMe, value.captcha);
+        this.props.resetForm();
     };
 
     render() {
@@ -31,7 +32,11 @@ const mapDispatchToProps = (dispatch) => {
     return {
         login: (email, password, rememberMe, captcha) => {
             dispatch(login(email, password, rememberMe, captcha));
+        },
+        resetForm: () => {
+            dispatch(reset('login'))
         }
+
     }
 };
 
