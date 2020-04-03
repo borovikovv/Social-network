@@ -1,1 +1,2 @@
-Create-react-app
+show app to link
+https://social-networkk.herokuapp.com/
