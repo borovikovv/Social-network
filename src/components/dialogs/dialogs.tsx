@@ -1,13 +1,20 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, FC } from 'react';
 import style from  './dialogs.module.css';
 import DialogsForm from "./dialogs-form";
+import {DialogType, MessageType} from "../../types/types";
 
+type Props = {
+    messages: Array<MessageType>
+    dialogs: Array<DialogType>
+    resetDialogsForm: () => void
+    sendMessage: (text: string) => void
+}
 
-const Dialogs = (props) => {
+const Dialogs: FC<Props> = (props) => {
     const { messages, dialogs, resetDialogsForm, sendMessage } = props;
 
-    const submit = (value) => {
-        sendMessage(value.addMessageText)
+    const submit = (value: any) => {
+        sendMessage(value.addMessageText);
         resetDialogsForm();
     };
 

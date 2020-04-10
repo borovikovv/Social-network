@@ -1,8 +1,19 @@
-import React from 'react';
+import React, {FC} from 'react';
 import ProfileInfo from './profile-info';
 import MyPostsContainer from './my-posts/my-posts-container';
+import {UserProfileType} from "../../types/types";
 
-const Profile = ({userProfile, status, updateUserStatus,
+type Props = {
+    userProfile: UserProfileType
+    status: string
+    updateUserStatus: (status: string) => void
+    updatePhoto: () => void
+    isOwner: boolean
+    updateProfileInfo: () => void
+    isFormError: boolean
+}
+
+const Profile: FC<Props> = ({userProfile, status, updateUserStatus,
                      updatePhoto, isOwner, updateProfileInfo, isFormError}) => {
 
     return(
@@ -18,6 +29,6 @@ const Profile = ({userProfile, status, updateUserStatus,
             <MyPostsContainer />
         </div>
     )
-}
+};
 
 export default Profile;

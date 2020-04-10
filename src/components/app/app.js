@@ -8,7 +8,7 @@ import News from '../news/news';
 import Music from '../music/music';
 import Settings from '../settings/settings';
 import { Route, Switch } from 'react-router-dom';
-import UsersContainer from './../users/users-container';
+import UsersContainer from '../users/users-container';
 import LoginFormContainer from "../login/login-container";
 import {connect} from "react-redux";
 import { initialization } from "../../redux/app-reducer";

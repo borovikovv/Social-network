@@ -15,15 +15,34 @@ import {
     getTotalItemsCount,
     getUsers
 } from "../../selectors/user-selectors";
+import {UserType} from "../../types/types";
+import {AppStateType} from "../../redux/store";
 
+type MapStateToPropsType = {
+    users: Array<UserType>
+    followingIsProgress: Array<number>
+    currentPage: number
+    pageSize: number
+    totalItemsCount: number
+    loading: boolean
+};
+type MapDispatchToPropsType = {
+    unfollowingSuccess: (id: number) => void
+    followingSuccess: (id: number) => void
+    requestUsersThunkCreator: () => void
+    changePageThunkCreator: (num: number, pageSizeNumber: number, currentPageNumber: number)=> void
+};
+type OwnPropsType = {};
 
-class UsersContainer extends PureComponent {
+type Props = MapStateToPropsType & MapDispatchToPropsType & OwnPropsType
+
+class UsersContainer extends PureComponent<Props> {
 
     componentDidMount() {
         this.props.requestUsersThunkCreator()
     }
 
-    onPageChanged = (num) => {
+    onPageChanged = (num: number) => {
         this.props.changePageThunkCreator(num, this.props.pageSize, this.props.currentPage)
     };
 
@@ -52,7 +71,7 @@ class UsersContainer extends PureComponent {
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: AppStateType) => {
     return {
         followingIsProgress: getFollowingIsProgress(state),
         users: getUsers(state),
@@ -72,5 +91,5 @@ const mapDispatchToProps = {
 
 export default compose(
     withAuthRedirect,
-    connect(mapStateToProps, mapDispatchToProps)
+    connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, AppStateType>(mapStateToProps, mapDispatchToProps)
 )(UsersContainer)
