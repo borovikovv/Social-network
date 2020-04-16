@@ -1,6 +1,9 @@
 import { userAPI} from "../api/api";
 import {findObjectProps} from "../utils/findObjectProps";
 import {UserType} from "../types/types";
+import {ThunkAction} from "redux-thunk";
+import {AppStateType} from "./store";
+import {Dispatch} from "redux";
 
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
@@ -44,12 +47,12 @@ const usersReducer = (state = initialState, action: ActionsTypes): InitialStateT
                 return {
                     ...state,
                     currentPage: action.payload
-                }
+                };
             case GET_USERS_COUNT:
                 return {
                     ...state,
                     totalItemsCount: action.payload
-                }
+                };
             case TOGGLE_LOADING:
                 return {
                     ...state,
@@ -106,7 +109,10 @@ export const getUsersCount = (count: number): GetUsersCountActionType => ({type:
 export const toggleLoading = ():ToggleLoadingActionType => ({type: TOGGLE_LOADING});
 export const toggleIsFollowing = (isFetching: boolean, id: number): ToggleIsFollowingActionType => ({ type: TOGGLE_IS_FOLLOWING, isFetching: isFetching, userId: id});
 
-export const requestUsersThunkCreator = () => (dispatch: any) => {
+type DispatchType = () => Dispatch<ActionsTypes>
+type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>;
+
+export const requestUsersThunkCreator = (): ThunkType => async (dispatch) => {
     userAPI.requestUsers().then((data: any) => {
             dispatch(toggleLoading());
             dispatch(setUsers(data.items));
@@ -114,7 +120,7 @@ export const requestUsersThunkCreator = () => (dispatch: any) => {
         });
 };
 
-export const changePageThunkCreator = (num: number, pageSize: number, currentPage: number) => async (dispatch: any) => {
+export const changePageThunkCreator = (num: number, pageSize: number, currentPage: number): ThunkType => async (dispatch: any) => {
     dispatch(setCurrentPage(num));
     let data = await userAPI.requestUsers(pageSize, currentPage);
         dispatch(toggleLoading());
@@ -130,11 +136,11 @@ const followUnfollowFlow = async (dispatch: any, id: number, apiMethod: any, act
     dispatch(toggleIsFollowing(false, id))
 };
 
-export const followingSuccess = (id: number) => async (dispatch: any) => {
+export const followingSuccess = (id: number): ThunkType => async (dispatch: any) => {
     return followUnfollowFlow(dispatch, id, userAPI.followUserRequest, follow);
 };
 
-export const unfollowingSuccess = (id: number) => async (dispatch: any) => {
+export const unfollowingSuccess = (id: number): ThunkType => async (dispatch: any) => {
     return followUnfollowFlow(dispatch, id, userAPI.unfollowUserRequest, unfollow);
 };
 

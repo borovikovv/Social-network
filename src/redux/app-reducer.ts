@@ -1,4 +1,6 @@
 import { setLoginData } from './aythReducer';
+import {ThunkAction} from "redux-thunk";
+import {AppStateType} from "./store";
 
 const INITIALIZATION_SUCCESS = 'INITIALIZATION_SUCCESS';
 
@@ -25,6 +27,9 @@ const appReducer = (state = initialState, action: any): InitialozationStateType 
 type initializationSuccessActionType = {
     type: typeof INITIALIZATION_SUCCESS;
 }
+
+type ActionsTypes = initializationSuccessActionType;
+type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>;
 
 const initializationSuccess = (): initializationSuccessActionType => ({
    type: INITIALIZATION_SUCCESS
