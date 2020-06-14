@@ -1,4 +1,4 @@
-import { setLoginData } from './aythReducer';
+import { setLoginData } from './authReducer';
 import {ThunkAction} from "redux-thunk";
 import {AppStateType} from "./store";
 

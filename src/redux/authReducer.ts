@@ -60,9 +60,10 @@ const getCaptchaURL = (url: string): getCaptchaURLType => ({
 });
 
 export const setLoginData = () => async (dispatch: any) => {
-    let response = await authAPI.me();
-    if(response.data.resultCode === 0) {
-        const { login, email, id } = response.data.data;
+    let meData = await authAPI.me();
+
+    if(meData.resultCode === 0) {
+        const { login, email, id } = meData.data;
         dispatch(setLoginDataAC(email, login, id, true))
     }
 };

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Login from './login-form';
 import {connect} from "react-redux";
-import {login} from "../../redux/aythReducer";
+import {login} from "../../redux/authReducer";
 import {compose} from "redux";
 import {withRouter} from "react-router-dom";
 import {reset} from "redux-form";

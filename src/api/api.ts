@@ -1,4 +1,5 @@
-import * as axios from 'axios';
+import axios from 'axios';
+import {UserProfileType} from "../types/types";
 
 const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
@@ -14,12 +15,12 @@ export const userAPI = {
             .then(response => response.data);
     },
 
-    followUserRequest(id) {
+    followUserRequest(id: number) {
         return instance.post(`follow/${id}`)
             .then(response => response.data);
     },
 
-    unfollowUserRequest(id) {
+    unfollowUserRequest(id: number) {
     return instance.delete(`follow/${id}`)
         .then(response => response.data);
     }
@@ -27,9 +28,9 @@ export const userAPI = {
 
 export const authAPI = {
     me() {
-        return instance.get(`/auth/me`);
+        return instance.get<MeResponseType>(`/auth/me`).then(res => res.data);
     },
-    login(email, password, rememberMe, captcha) {
+    login(email: string, password: string, rememberMe: boolean, captcha: string | null = null) {
         return instance.post(`/auth/login`,
             { email, password, rememberMe, captcha });
     },
@@ -38,17 +39,23 @@ export const authAPI = {
     }
 };
 
+type MeResponseType = {
+    data: { id: number, login: string, email: string }
+    resultCode: number
+    messages: Array<string>
+};
+
 export const profileAPI = {
-    requestProfile(userId){
+    requestProfile(userId: number){
         return instance.get(`profile/${userId}`).then(response => response.data);
     },
-    requestStatus(userId) {
+    requestStatus(userId: number) {
         return instance.get(`profile/status/${userId}`).then(responce => responce.data);
     },
-    updateStatus(status) {
+    updateStatus(status: string) {
         return instance.put(`profile/status`, {status}).then(responce => responce.data);
     },
-    updatePhoto(photo) {
+    updatePhoto(photo: any) {
         const formData = new FormData();
         formData.append('image', photo);
         return instance.put(`profile/photo`, formData, {
@@ -57,7 +64,7 @@ export const profileAPI = {
             }
         })
     },
-    updateProfile(profile) {
+    updateProfile(profile: UserProfileType) {
         return instance.put(`profile`, profile)
     }
 };
