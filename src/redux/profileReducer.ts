@@ -1,7 +1,8 @@
-import { profileAPI } from "../api/api";
+import {profileAPI, ResultCodes} from "../api/api";
 import image from '../img/AVA.jpeg';
 import {stopSubmit} from "redux-form";
-import {PhotosType, UserProfileType, PostType} from "../types/types";
+import {PhotosType, PostType, UserProfileType} from "../types/types";
+
 let newId = 6;
 const ADD_POST = 'ADD_POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
@@ -113,20 +114,20 @@ export const requestUserProfile = (id: number) => (dispatch: any) => {
 };
 
 export const requestUserStatus = (id: number) => async (dispatch: any) => {
-    let resolve = await profileAPI.requestStatus(id)
+    let resolve = await profileAPI.requestStatus(id);
         dispatch(getUserStatusAC(resolve))
 };
 
 export const updateUserStatus = (status: string) => async (dispatch: any) => {
     let resolve = await profileAPI.updateStatus(status);
-    if (resolve.resultCode === 0) {
+    if (resolve.resultCode === ResultCodes.Success) {
         dispatch(updateUserStatusAC(status));
     }
 };
 
 export const updateProfilePhoto = (photo: any) => async (dispatch: any) => {
     let resolve = await profileAPI.updatePhoto(photo);
-    if (resolve.resultCode === 0) {
+    if (resolve.resultCode === ResultCodes.Success) {
         dispatch(updateProfilePhotoSuccess(resolve.data.data.photos));
     }
 };
@@ -134,7 +135,7 @@ export const updateProfilePhoto = (photo: any) => async (dispatch: any) => {
 export const updateProfileInfo = (profile: UserProfileType) => async (dispatch: any, getStore: any) => {
     const userId = getStore().auth.userId;
     let resolve = await profileAPI.updateProfile(profile);
-    if (resolve.data.resultCode === 0) {
+    if (resolve.data.resultCode === ResultCodes.Success) {
         profileAPI.requestProfile(userId)
             .then((data: any) => {
                 dispatch(setUserProfile(data));

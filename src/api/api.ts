@@ -31,19 +31,34 @@ export const authAPI = {
         return instance.get<MeResponseType>(`/auth/me`).then(res => res.data);
     },
     login(email: string, password: string, rememberMe: boolean, captcha: string | null = null) {
-        return instance.post(`/auth/login`,
-            { email, password, rememberMe, captcha });
+        return instance.post<LoginResponseType>(`/auth/login`,
+            { email, password, rememberMe, captcha }).then(res => res.data);
     },
     logout() {
         return instance.delete(`/auth/login`);
     }
 };
 
-type MeResponseType = {
-    data: { id: number, login: string, email: string }
-    resultCode: number
+type LoginResponseType = {
+    data: { userId: number }
+    resultCode: ResultCodes
     messages: Array<string>
 };
+
+type MeResponseType = {
+    data: { id: number, login: string, email: string }
+    resultCode: ResultCodes
+    messages: Array<string>
+};
+
+export enum ResultCodes {
+    Success = 0,
+    Error = 1
+}
+
+export enum ResultCodeCaptcha {
+    CaptchaIsRequired = 10
+}
 
 export const profileAPI = {
     requestProfile(userId: number){
